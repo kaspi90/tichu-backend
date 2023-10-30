@@ -22,7 +22,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
 
   app.enableCors({
-    origin: 'http://localhost:3000' || 'https://tichu-frontend.vercel.app/',
+    origin:
+      'http://localhost:3000' ||
+      'https://tichu-frontend-2rknrbi94-kaspi90.vercel.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
