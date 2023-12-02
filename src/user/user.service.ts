@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcrypt';
@@ -26,9 +26,8 @@ export class UserService {
   async createUser(
     data: Prisma.UserCreateInput,
   ): Promise<{ token: string; user: User }> {
-    const hashedPassword = await bcrypt.hash(data.password, 10); // Hash the password using bcrypt
+    const hashedPassword = await bcrypt.hash(data.password, 10);
 
-    // Replace the plain-text password with the hashed password
     const user = await this.prisma.user.create({
       data: {
         ...data,
@@ -36,11 +35,8 @@ export class UserService {
       },
     });
 
-    // payload for the token
     const payload = { userId: user.id };
 
-    // generate a token with a secret key
-    // the secret should be stored in environment variables, not hardcoded as it is here
     const token = jwt.sign(
       payload,
       'c79c44cbbd7e8bd432d318abbc51d01a28787a6d44300373ab5682de21b0dc6e',
@@ -54,7 +50,6 @@ export class UserService {
   }): Promise<User> {
     const { where, data } = params;
 
-    // If a password is provided in the update, hash it before updating
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }

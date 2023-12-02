@@ -1,4 +1,3 @@
-// game.controller.ts
 import {
   Body,
   Controller,
@@ -9,10 +8,9 @@ import {
   Req,
 } from '@nestjs/common';
 import { GameService } from './game.service';
-import { CreateGameDto } from './dto/game.dto';
-import { Request } from 'express';
+import { CreateGameDto } from '../dto/game.dto';
 
-@Controller('games') // This means all routes will start with '/games'
+@Controller('games')
 export class GameController {
   constructor(private readonly gameService: GameService) {}
 
@@ -48,6 +46,4 @@ export class GameController {
 
     return game;
   }
-
-  // You can also add other routes for update, delete, etc.
 }

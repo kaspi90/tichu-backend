@@ -6,15 +6,15 @@ import {
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UserModule } from './user.module';
-import { PrismaService } from './prisma.service';
-import { AuthModule } from './auth.module';
+import { UserModule } from './user/user.module';
+import { PrismaService } from './prisma/prisma.service';
+import { AuthModule } from './auth/auth.module';
 import { JwtMiddleware } from './middlewares/jwt.middleware';
-import { UploadService } from './upload.service';
-import { UploadModule } from './upload.module';
-import { GameModule } from './game.module';
-import { GameController } from './game.controller';
-import { GameService } from './game.service';
+import { UploadService } from './upload/upload.service';
+import { UploadModule } from './upload/upload.module';
+import { GameModule } from './game/game.module';
+import { GameService } from './game/game.service';
+
 @Module({
   imports: [UserModule, AuthModule, UploadModule, GameModule],
   controllers: [AppController],

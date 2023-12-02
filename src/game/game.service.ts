@@ -1,7 +1,6 @@
-// game.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from './prisma.service'; // Assuming you have a PrismaService that wraps around PrismaClient
-import { CreateGameDto } from './dto/game.dto';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateGameDto } from '../dto/game.dto';
 
 @Injectable()
 export class GameService {
@@ -43,6 +42,4 @@ export class GameService {
       },
     });
   }
-
-  // Add other methods as needed (update, delete, etc.)
 }

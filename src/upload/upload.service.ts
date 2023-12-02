@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from 'fs';
@@ -39,17 +39,14 @@ export class UploadService {
   async saveFileDetails(file: Express.Multer.File, userId: number) {
     console.log('File Path:', file.path);
 
-    // Fetch the existing user's details using userId
     const existingUser = await this.prisma.user.findUnique({
       where: { id: userId },
     });
 
-    // If the user already has an image, delete it
     if (existingUser?.image) {
       this.deleteFile(existingUser.image);
     }
 
-    // Update the user's image details
     const updatedUser = await this.prisma.user.update({
       where: { id: userId },
       data: {
